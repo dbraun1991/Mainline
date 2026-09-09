@@ -1,0 +1,504 @@
+/* Imported here (not from a JS module) so the browser discovers this
+   @font-face while parsing the initial, render-blocking stylesheet —
+   starting the font-file fetch immediately instead of only after the full
+   JS module graph resolves, which is what caused a visible fallback-font
+   flash on page load. */
+@import '@fontsource/alex-brush';
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --accent: #3b82f6;
+  --lane-band-even: #f1f5f9;
+  --lane-band-odd: #ffffff;
+  --danger: #dc2626;
+  --gold: #a3760a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --border: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #60a5fa;
+    --lane-band-even: #1e293b;
+    --lane-band-odd: #172033;
+    --gold: #e6c164;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.top-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand-wordmark {
+  justify-self: start;
+  font-family: 'Alex Brush', cursive;
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.project-title {
+  justify-self: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.top-bar-actions {
+  justify-self: end;
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  font: inherit;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+.icon-button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover {
+  color: var(--accent);
+}
+
+.app-shell {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+}
+
+.plot-sidebar {
+  position: relative;
+  flex: none;
+  width: 220px;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  padding: 16px 12px;
+  overflow-y: auto;
+}
+
+/* Drag-to-resize handle, adapted from a sibling project's resizable-panel
+   pattern: a thin edge strip with a small pill grip that widens and turns
+   accent-colored on hover *or* mid-drag (js/sidebar-resize.js toggles
+   .resizing) — a plain :hover alone would flicker off almost immediately
+   once dragging starts, since the pointer leaves this narrow strip. */
+.resize-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+}
+
+.resize-handle::before {
+  content: '';
+  width: 3px;
+  height: 15%;
+  border-radius: 2px;
+  background: var(--border);
+  transition: background-color 0.15s, width 0.15s;
+}
+
+.resize-handle:hover::before,
+.resize-handle.resizing::before {
+  width: 4px;
+  background: var(--accent);
+}
+
+.resize-handle-right {
+  right: 0;
+}
+
+.plot-sidebar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.plot-sidebar-header h2 {
+  margin: 0;
+  padding: 0 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.new-plot-button {
+  width: 100%;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.plot-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.plot-item {
+  width: 100%;
+  text-align: left;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.plot-item:hover {
+  border-color: var(--border);
+}
+
+.plot-item.active {
+  background: var(--lane-band-even);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.chart-container {
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) var(--lane-band-even);
+}
+
+.chart-container::-webkit-scrollbar {
+  height: 12px;
+}
+
+.chart-container::-webkit-scrollbar-track {
+  background: var(--lane-band-even);
+}
+
+.chart-container::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 6px;
+  border: 3px solid var(--lane-band-even);
+}
+
+.chart-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+.empty-state {
+  color: var(--text-muted);
+  padding: 40px;
+  text-align: center;
+}
+
+.swimlane-svg {
+  display: block;
+}
+
+.lane-band-even {
+  fill: var(--lane-band-even);
+}
+
+.lane-band-odd {
+  fill: var(--lane-band-odd);
+}
+
+.lane-label {
+  fill: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lane-hit-line {
+  stroke: transparent;
+  transition: stroke 0.15s;
+}
+
+.lane-hit-line:hover {
+  stroke: var(--accent);
+  stroke-opacity: 0.12;
+}
+
+.fork-connector {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.fork-origin-dot {
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+
+.axis-gridline {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.axis-label {
+  fill: var(--text-muted);
+  font-size: 11px;
+}
+
+.event-dot {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.event-node:hover .event-dot {
+  fill: var(--accent);
+}
+
+.event-label {
+  fill: var(--text);
+  font-size: 12px;
+}
+
+/* Event tooltip */
+
+.event-tooltip {
+  position: fixed;
+  z-index: 200;
+  max-width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  padding: 10px 14px;
+  pointer-events: none;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.event-tooltip[hidden] {
+  display: none;
+}
+
+.event-tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.event-tooltip-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.event-tooltip-title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.event-tooltip-meta {
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.event-tooltip-description {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+/* Dialogs */
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.dialog-box {
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 24px;
+  min-width: 340px;
+  max-width: 90vw;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.dialog-title {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+.dialog-message {
+  margin: 0 0 20px;
+}
+
+.dialog-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.dialog-field input,
+.dialog-field select,
+.dialog-field textarea {
+  font: inherit;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.dialog-field select:disabled {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* The shared padding above squeezes a native color swatch down to a
+   near-invisible sliver inside its own solid background — override both
+   so the chosen color actually fills the box. */
+.dialog-field input[type='color'] {
+  padding: 3px;
+  width: 56px;
+  height: 36px;
+  background: none;
+}
+
+.dialog-field textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dialog-confirm {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.dialog-delete {
+  margin-right: auto;
+  color: var(--danger);
+  border-color: var(--danger);
+  background: transparent;
+}
+
+.dialog-confirm-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.help-dialog-box {
+  max-width: 560px;
+}
+
+.help-content {
+  max-height: 60vh;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 4px;
+}
+
+.help-content section + section {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.help-content h3 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+
+.help-content p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.help-content strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.help-content code {
+  font-size: 0.85em;
+  background: var(--bg);
+  border-radius: 4px;
+  padding: 1px 5px;
+}

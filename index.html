@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mainline</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <span class="brand-wordmark">Mainline</span>
+      <span id="project-title" class="project-title"></span>
+      <div class="top-bar-actions">
+        <button type="button" id="help-button" class="icon-button" title="How Mainline works" aria-label="How Mainline works">?</button>
+        <button type="button" id="add-storyline">+ Storyline</button>
+        <button type="button" id="add-event">+ Event</button>
+        <button type="button" id="export-json">Export JSON</button>
+        <button type="button" id="import-trigger">Import JSON</button>
+        <input type="file" id="import-json" accept="application/json" hidden />
+      </div>
+    </header>
+
+    <div class="app-shell">
+      <aside class="plot-sidebar">
+        <div class="plot-sidebar-header">
+          <button type="button" id="new-plot" class="new-plot-button">+ New Plot</button>
+          <h2>Plots</h2>
+        </div>
+        <ul id="plot-list" class="plot-list"></ul>
+        <div id="sidebar-resize-handle" class="resize-handle resize-handle-right"></div>
+      </aside>
+
+      <main id="chart" class="chart-container"></main>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>
