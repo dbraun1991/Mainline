@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "title": "The Clockwork Heist — Timeline"
+  },
+  "storylines": [
+    { "id": "sl-main", "name": "Main Plot", "color": "#3b82f6" },
+    { "id": "sl-romance", "name": "Elin & Cato", "color": "#ec4899" },
+    { "id": "sl-villain", "name": "The Chancellor's Scheme", "color": "#ef4444" }
+  ],
+  "events": [
+    {
+      "id": "ev-1",
+      "storylineId": "sl-main",
+      "title": "Heist crew assembles",
+      "date": "2024-03-01",
+      "time": "08:00",
+      "description": "Elin recruits the crew at the Dockside tavern."
+    },
+    {
+      "id": "ev-2",
+      "storylineId": "sl-villain",
+      "title": "Chancellor commissions the vault",
+      "date": "2024-03-02",
+      "time": "10:30",
+      "description": "The Chancellor orders a new clockwork vault to protect the ledger."
+    },
+    {
+      "id": "ev-3",
+      "storylineId": "sl-romance",
+      "title": "Elin and Cato meet again",
+      "date": "2024-03-04",
+      "time": "19:00",
+      "description": "A tense reunion at the safehouse."
+    },
+    {
+      "id": "ev-4",
+      "storylineId": "sl-main",
+      "title": "First reconnaissance of the vault",
+      "date": "2024-03-06",
+      "time": "22:00",
+      "description": "The crew scouts the Chancellor's tower."
+    },
+    {
+      "id": "ev-5",
+      "storylineId": "sl-villain",
+      "title": "Spy reports the crew's interest",
+      "date": "2024-03-07",
+      "time": "07:15",
+      "description": "The Chancellor's informant raises the alarm."
+    },
+    {
+      "id": "ev-6",
+      "storylineId": "sl-romance",
+      "title": "An old promise resurfaces",
+      "date": "2024-03-09",
+      "time": "21:00",
+      "description": "Cato reminds Elin of a debt owed."
+    },
+    {
+      "id": "ev-7",
+      "storylineId": "sl-main",
+      "title": "The heist",
+      "date": "2024-03-12",
+      "time": "23:45",
+      "description": "The crew breaks into the vault."
+    },
+    {
+      "id": "ev-8",
+      "storylineId": "sl-villain",
+      "title": "Guards ambush the crew",
+      "date": "2024-03-13",
+      "time": "00:20",
+      "description": "The Chancellor springs the trap he set."
+    },
+    {
+      "id": "ev-9",
+      "storylineId": "sl-romance",
+      "title": "Cato's sacrifice",
+      "date": "2024-03-13",
+      "time": "00:35",
+      "description": "Cato holds the guards off so Elin can escape."
+    },
+    {
+      "id": "ev-10",
+      "storylineId": "sl-main",
+      "title": "Escape into the canals",
+      "date": "2024-03-13",
+      "time": "01:00",
+      "description": "Elin flees with the ledger, crew scattered."
+    }
+  ]
+}
