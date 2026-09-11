@@ -2,6 +2,8 @@
 
 - Status: Accepted
 - Date: 2026-09-07
+- Note: the repo-name assumption behind `vite.config.js`'s `base` was
+  corrected in [ADR-0016](0016-github-repo-name-mainline.md).
 
 ## Context
 

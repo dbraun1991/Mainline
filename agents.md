@@ -7,9 +7,8 @@ swimlanes, plot events (date + time) on them, and see the whole
 manuscript's timeline at a glance. See `README.md` for the full product
 framing. (Named Storylane through early development — renamed to avoid a
 collision with an unrelated, unaffiliated product of that name already
-live on the web. The folder/repo path `storylane-local` is unchanged, so
-it still appears in build config and deploy URLs; see the note on
-`vite.config.js`'s `base` below.)
+live on the web. Hosted on GitHub as `Mainline`, matching the current
+name; see the note on `vite.config.js`'s `base` below.)
 
 **Current status: working end to end for v1, plus a round of polish.** Vite
 dev/build pipeline, the data model + validation, the SVG swimlane renderer,
@@ -33,16 +32,16 @@ storage is empty.
 
 ```
 npm install
-npm run dev      # http://localhost:5173/storylane-local/
+npm run dev      # http://localhost:5173/Mainline/
 npm run build    # production build to dist/
 npm run preview  # serve that build locally
 ```
 
 **Deployment**: `.github/workflows/deploy-pages.yml` deploys `dist/` to
-GitHub Pages on every push to `main` (ADR-0006) — not yet live, since git
-isn't initialized for this repo yet. `vite.config.js`'s
-`base: '/storylane-local/'` assumes the eventual GitHub repo is named to
-match this folder; update it if that assumption turns out wrong.
+GitHub Pages on every push to `main` (ADR-0006), once Pages is enabled in
+the repo's settings (Settings → Pages → Source: GitHub Actions).
+`vite.config.js`'s `base: '/Mainline/'` matches the actual GitHub repo
+name (ADR-0016); update it again if the repo is ever renamed.
 
 ## Architecture
 

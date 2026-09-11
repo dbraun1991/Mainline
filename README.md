@@ -8,8 +8,8 @@ manuscript.
 
 > Called Storylane through early development; renamed to avoid a naming
 > collision with an unrelated, unaffiliated product already live on the
-> web. The repo/folder path (`storylane-local`) is unchanged, so it still
-> shows up in the dev URL and build config below.
+> web. Hosted on GitHub as `Mainline`, matching the current name — see
+> the dev URL and build config below.
 
 Visualized in the spirit of a metro-map renderer (lines on a shared axis),
 but purpose-built for storylines that stay on their own lane rather than
@@ -51,7 +51,7 @@ plot), but never merges back or crosses another lane's track — see
 
 ```
 npm install
-npm run dev      # starts the Vite dev server, http://localhost:5173/storylane-local/
+npm run dev      # starts the Vite dev server, http://localhost:5173/Mainline/
 npm run build    # production build to dist/
 npm run preview  # serve that build locally
 ```
@@ -59,9 +59,10 @@ npm run preview  # serve that build locally
 Requires Node.js (any current LTS).
 
 **Deployment**: every push to `main` auto-deploys to GitHub Pages via
-`.github/workflows/deploy-pages.yml` (ADR-0006) once this repo has a `main`
-branch and a GitHub remote with Pages enabled. `vite.config.js`'s
-`base: '/storylane-local/'` matches Pages' project-site subpath.
+`.github/workflows/deploy-pages.yml` (ADR-0006), once Pages is enabled in
+the repo's settings (Settings → Pages → Source: GitHub Actions).
+`vite.config.js`'s `base: '/Mainline/'` matches Pages' project-site
+subpath (ADR-0016).
 
 ## Project data
 
@@ -94,6 +95,7 @@ Highlights:
 | [0013](docs/adr/0013-click-line-event-creation.md) | Click-line-then-node: a second, pre-filled entry point into event creation |
 | [0014](docs/adr/0014-branching-storylines.md) | Branching storylines: a fork tree, snapshot-anchored to an event, not independent lanes only |
 | [0015](docs/adr/0015-two-step-fork-picker.md) | "Forks from" picker: two steps (storyline, then event), not one flat list |
+| [0016](docs/adr/0016-github-repo-name-mainline.md) | GitHub repo name: `Mainline`, correcting the `storylane-local` base-path assumption |
 
 ## What it does NOT do (yet)
 
