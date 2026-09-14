@@ -6,6 +6,8 @@ time — along a shared timeline. It's meant to make it easy to see, at a
 glance, how a main plot and its subplots interleave in time across a whole
 manuscript.
 
+**Live demo**: https://dbraun1991.github.io/Mainline/
+
 > Called Storylane through early development; renamed to avoid a naming
 > collision with an unrelated, unaffiliated product already live on the
 > web. Hosted on GitHub as `Mainline`, matching the current name — see
