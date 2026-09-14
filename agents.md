@@ -10,6 +10,9 @@ collision with an unrelated, unaffiliated product of that name already
 live on the web. Hosted on GitHub as `Mainline`, matching the current
 name; see the note on `vite.config.js`'s `base` below.)
 
+**Live demo**: https://dbraun1991.github.io/Mainline/ — deployed via GitHub
+Pages, see Deployment below.
+
 **Current status: working end to end for v1, plus a round of polish.** Vite
 dev/build pipeline, the data model + validation, the SVG swimlane renderer,
 add/edit/delete for both storylines and events (via promise-based modal
