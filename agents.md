@@ -22,6 +22,8 @@ resizable, persistent sidebar for holding and switching between several
 plots (ADR-0007, ADR-0009), a themed HTML event tooltip (ADR-0008), UUID
 ids (ADR-0010), a self-hosted signature-style wordmark font (ADR-0012), and
 a doc-only DSL for LLM-assisted plot import (ADR-0011, no in-app parser),
+saved by convention into the gitignored `local/` scratch directory
+(ADR-0017),
 a second, pre-filled way to add an event by clicking directly on a
 storyline's line (ADR-0013), branching — a storyline can fork from a
 specific event on another storyline via a two-step picker, forming a tree
@@ -90,6 +92,7 @@ that makes this safe without a routing solver is exactly what keeps
 | `docs/adr/README.md` | ADR index — numbered, append-only decision log |
 | `docs/adr/0001-*.md` – `0015-*.md` | Individual decisions — see the index for titles |
 | `docs/llm-import-dsl.md` | Self-contained instructions for an LLM converting a source text into an importable Mainline project JSON file, via a compact intermediate notation |
+| `local/README.md` | Where LLM agents (and humans) should save local/converted story files — a gitignored scratch directory (ADR-0017) |
 
 ## Module Layout
 
