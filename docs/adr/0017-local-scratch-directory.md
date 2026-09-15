@@ -1,6 +1,6 @@
 # ADR-0017: `local/` — a gitignored scratch directory for LLM-produced story files
 
-- Status: Accepted
+- Status: Superseded by [ADR-0018](0018-local-directory-fully-gitignored.md)
 - Date: 2026-09-15
 - Relates to: [ADR-0011](0011-llm-import-dsl.md), [ADR-0004](0004-persistence.md)
 

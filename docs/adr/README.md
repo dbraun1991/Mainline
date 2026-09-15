@@ -23,4 +23,5 @@ header only.
 | [0014](0014-branching-storylines.md) | Branching storylines: a fork tree, snapshot-anchored to an event, not independent lanes only |
 | [0015](0015-two-step-fork-picker.md) | "Forks from" picker: two steps (storyline, then event), not one flat list |
 | [0016](0016-github-repo-name-mainline.md) | GitHub repo name: `Mainline`, correcting the `storylane-local` base-path assumption |
-| [0017](0017-local-scratch-directory.md) | `local/`: a gitignored scratch directory for LLM-produced story files |
+| [0017](0017-local-scratch-directory.md) | ~~`local/`: a gitignored scratch directory for LLM-produced story files~~ → superseded by 0018 |
+| [0018](0018-local-directory-fully-gitignored.md) | `local/` is fully gitignored, including its own README |
